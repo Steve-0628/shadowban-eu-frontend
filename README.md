@@ -15,6 +15,7 @@ Backend:
 ---
 
 ## Setup
+Requires Volta installed; The version of node and npm are very old. It uses npm@5 and node@10. 
 
 ```bash
 # Clone
