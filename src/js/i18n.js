@@ -25,7 +25,7 @@ export default class I18N {
             },
             {
               // XHRBackend options
-              loadPath: '/i18n/{{lng}}/{{ns}}.json',
+              loadPath: 'i18n/{{lng}}/{{ns}}.json',
               crossDomain: false
             }
           ]

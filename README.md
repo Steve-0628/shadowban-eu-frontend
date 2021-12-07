@@ -2,15 +2,9 @@
 
 #### One-page web app, testing Twitter users for various shadowbans.
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/6986eb7e8da272eb9d1f/maintainability)](https://codeclimate.com/github/shadowban-eu/TwitterShadowBanV2/maintainability)
-
 ## NOTE
 
-You are in shadowban-eu/TwitterShadowBanV2! No worries. :)
-
-We are currently performing a major overhaul of the site.
-This includes finally having a proper backend.  
-To keep things nice and clean, we therefore split the now distinct back- and frontend code.
+Shadowban.eu Frontend Forked. For [hmpf.club/shadowban](https://hmpf.club/shadowban) and [hisubway.online/shadowban](https://hisubway.online/shadowban).
 
 Frontend (former TwitterShadowBanV2; history preserved):  
 [shadowban-eu/shadowban-eu-frontend](https://github.com/shadowban-eu/shadowban-eu-frontend.git)

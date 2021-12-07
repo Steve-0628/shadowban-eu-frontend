@@ -16,7 +16,7 @@ let ui;
 const fullTest = async (screenName) => {
   let response;
   try {
-    response = await fetch(`.api/${screenName}`);
+    response = await fetch(`https://shadowban.hmpf.club/${screenName}`);
   } catch (err) {
     ui.updateTask({
       id: 'checkUser',
