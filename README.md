@@ -6,6 +6,8 @@
 
 Shadowban.eu Frontend Forked. For [hmpf.club/shadowban](https://hmpf.club/shadowban) and [hisubway.online/shadowban](https://hisubway.online/shadowban).
 
+Works with [Steve-0628/shadowban-backend](https://github.com/Steve-0628/shadowban-backend). Check it out too!
+
 Frontend (former TwitterShadowBanV2; history preserved):  
 [shadowban-eu/shadowban-eu-frontend](https://github.com/shadowban-eu/shadowban-eu-frontend.git)
 
