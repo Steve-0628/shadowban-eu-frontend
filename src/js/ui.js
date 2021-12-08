@@ -216,7 +216,7 @@ export default class UI {
 
   get screenNameHistoryState() {
     const screenName = this.screenName.value;
-    return [{ screenName }, `Testing ${screenName}`, `/shadowban/${screenName}`];
+    return [{ screenName }, `Testing ${screenName}`, `/shadowban/?username=${screenName}`];
   }
 
   updateTask = (...updates) => {

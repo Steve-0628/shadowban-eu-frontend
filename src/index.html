@@ -1,277 +1,212 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head lang='en'>
-    <meta charset='utf-8'>
-    <title>Twitter Shadowban Test</title>
-    <meta description="Determine wether a Twitter user is shadow banned">
-    <meta name="keywords" content="Twitter, Shadowban, Shadowbanned, Ban, Block, Quality Filter, QFD">
-    <meta name='viewport' content='width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1'>
-    <meta property="og:title" content="Twitter Shadowban Test">
-    <meta property="og:description" content="Are you shadowbanned on Twitter?">
-    <meta property="og:image" content="https://www.shadowban.eu/img/sm_preview.png">
-    <meta property="og:url" content="https://hmpf.club/shadowban/">
-    <meta property="og:site_name" content="Twitter Shadowban Test">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image:alt" content="shadwoban.eu">
-    <base target="_blank" href="<%= baseHref %>">
+    <head lang="en">
+        <meta charset="utf-8" />
+        <title>Twitter Shadowban Test</title>
+        <meta description="Determine wether a Twitter user is shadow banned" />
+        <meta name="keywords" content="Twitter, Shadowban, Shadowbanned, Ban, Block, Quality Filter, QFD" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+        <meta property="og:title" content="Twitter Shadowban Test" />
+        <meta property="og:description" content="Are you shadowbanned on Twitter?" />
+        <meta property="og:image" content="https://www.shadowban.eu/img/sm_preview.png" />
+        <meta property="og:url" content="https://hisubway.online/shadowban/" />
+        <meta property="og:site_name" content="Twitter Shadowban Test" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image:alt" content="shadwoban.eu" />
+        <base target="_blank" href="<%= baseHref %>" />
 
-    <link rel="manifest" href="manifest.json" />
-    <link rel="prefetch" href="img/gears.svg" />
+        <link rel="manifest" href="manifest.json" />
+        <link rel="prefetch" href="img/gears.svg" />
 
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import Fonts-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-  </head>
-  <body>
-    <% if (!production) { %>
-      <section class="dev-header">
-        <div class="row">
-          <div class="col s6">
-            This is a development build!
-          </div>
-          <div class="col s6 right-align">
-            <%= buildVersion %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col s12">
-            Test users: <%= testUsers %>
-          </div>
-        </div>
-      </section>
-    <% } %>
-    <section class="header section">
-      <div class="row">
-        <div class="col s12">
-          <div class="loadable-container">
-            <h2
-              id="headerScreenName"
-              data-i18n="common:title"
-              class="loadable loading"
-            >
-              {{common:title}}
-            </h2>
-          </div>
-        </div>
-      </div>
-      <div class="row header-buttons">
-        <div class="col 6">
-          <div class="loadable-container">
-            <button
-              class="btn modal-trigger waves-effect waves white loadable loading"
-              data-target="donate-modal"
-              data-i18n="common:buttons.support"
-            >
-              {{common:buttons.support}}
-            </button>
-            <div id="donate-thanks" class="hide">
-              Thank you for your donation!
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <!--Import Fonts-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" />
+        <script>
+            window.addEventListener("load", () => {
+                const getQueries = (url = window.location.href) => {
+                    return Object.fromEntries(new URL(url).searchParams.entries());
+                };
+                const setUsername = (username = null) => {
+                    const input = document.getElementById("screenName");
+                    const check = document.getElementById("check");
+                    if (!(username && input && check)) return false;
+                    input.value = username;
+                    input.dispatchEvent(new Event("keyup"));
+                    check.click();
+                };
+                window.history.replaceState = function () {};
+
+                window.setTimeout(() => setUsername(getQueries().username), 100);
+            });
+        </script>
+    </head>
+    <body>
+        <% if (!production) { %>
+        <section class="dev-header">
+            <div class="row">
+                <div class="col s6">This is a development build!</div>
+                <div class="col s6 right-align"><%= buildVersion %></div>
             </div>
-          </div>
-        </div>
-        <div class="col 6 hiddendiv">
-          <div class="loadable-container">
-            <button
-              class="btn install-trigger waves-effect waves white loadable loading"
-              data-i18n="common:buttons.install"
-            >
-              {{common:buttons.install}}
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="controls" class="row">
-      <div class="col s12 offset-m1 m10 offset-l2 l8 center-align">
-        <div class="loadable-container">
-          <div class="card valign-wrapper loadable loading">
-            <div class="input-field">
-              <span class="prefix">@</span>
-              <input
-                id="screenName"
-                type="text"
-                autocomplete="nickname"
-                required
-                pattern="^[A-Za-z0-9_]{1,15}$"
-                data-position="bottom"
-                data-tooltip="Please provide a valid Twitter @handle!"
-                maxlength="15"
-              >
-              <label
-                for="screenName"
-                data-i18n="common:screenNameDefault"
-              >
-                {{common:screenNameDefault}}
-              </label>
+            <div class="row">
+                <div class="col s12">Test users: <%= testUsers %></div>
             </div>
-            <div>
-              <button
-                id="check"
-                class="waves-effect waves white btn btn-flat"
-                data-i18n="common:buttons.check"
-              >
-                {{common:buttons.check}}
-              </button>
+        </section>
+        <% } %>
+        <section class="header section">
+            <div class="row">
+                <div class="col s12">
+                    <div class="loadable-container">
+                        <h2 id="headerScreenName" data-i18n="common:title" class="loadable loading">{{common:title}}</h2>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            <div class="row header-buttons">
+                <div class="col 6">
+                    <div class="loadable-container">
+                        <button class="btn modal-trigger waves-effect waves white loadable loading" data-target="donate-modal" data-i18n="common:buttons.support">{{common:buttons.support}}</button>
+                        <div id="donate-thanks" class="hide">Thank you for your donation!</div>
+                    </div>
+                </div>
+                <div class="col 6 hiddendiv">
+                    <div class="loadable-container">
+                        <button class="btn install-trigger waves-effect waves white loadable loading" data-i18n="common:buttons.install">{{common:buttons.install}}</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section id="results" class="row">
-      <div class="col s12 offset-m1 m10 offset-l2 l8 center-align">
-        <div class="loadable-container">
-          <ul id="tasks" class="collapsible loadable loading"></ul>
-        </div>
-      </div>
-    </section>
+        <section id="controls" class="row">
+            <div class="col s12 offset-m1 m10 offset-l2 l8 center-align">
+                <div class="loadable-container">
+                    <div class="card valign-wrapper loadable loading">
+                        <div class="input-field">
+                            <span class="prefix">@</span>
+                            <input id="screenName" type="text" autocomplete="nickname" required pattern="^[A-Za-z0-9_]{1,15}$" data-position="bottom" data-tooltip="Please provide a valid Twitter @handle!" maxlength="15" />
+                            <label for="screenName" data-i18n="common:screenNameDefault"> {{common:screenNameDefault}} </label>
+                        </div>
+                        <div>
+                            <button id="check" class="waves-effect waves white btn btn-flat" data-i18n="common:buttons.check">{{common:buttons.check}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="row">
-      <div class="col s12 offset-m1 m10 offset-l2 l8">
-        <div class="loadable-container">
-          <ul id="functionality" class="collapsible popout loadable loading">
-            <li>
-              <div class="flex-col collapsible-header">
-                <span class="attention" data-i18n="functionality:limitVisibility.title">
-                  {{functionality:limitVisibility.title}}
-                </span>
-                <span class="text-strike font-small" data-i18n="functionality:noShadowbanClaim.title">
-                  {{functionality:noShadowbanClaim.title}}
-                </span>
-              </div>
-              <div class="collapsible-body">
-                <p class="noban-claim" data-i18n="functionality:limitVisibility.text">
-                  {{functionality:limitVisibility.text}}
-                </p>
-                <img class="materialboxed" width="100%" src="img/updated-tos.png" />
-                <p class="noban-claim-legacy" data-i18n="functionality:noShadowbanClaim.text">
-                  {{functionality:noShadowbanClaim.text}}
-                </p>
-              </div>
-            </li>
-            <li>
-              <div
-                class="collapsible-header"
-                data-i18n="functionality:qfdTestGone.title"
-              >
-                {{functionality:qfdTestGone.title}}
-              </div>
-              <div
-                class="collapsible-body"
-                data-i18n="functionality:qfdTestGone.text"
-              >
-                {{functionality:qfdTestGone.text}}
-              </div>
-            </li>
-            <li>
-              <div
-                class="collapsible-header"
-                data-i18n="functionality:testerFunctions.title"
-              >
-                {{functionality:testerFunctions.title}}
-              </div>
-              <div
-                class="collapsible-body"
-                data-i18n="functionality:testerFunctions.text"
-              >
-                {{functionality:testerFunctions.text}}
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+        <section id="results" class="row">
+            <div class="col s12 offset-m1 m10 offset-l2 l8 center-align">
+                <div class="loadable-container">
+                    <ul id="tasks" class="collapsible loadable loading"></ul>
+                </div>
+            </div>
+        </section>
 
-    <footer class="section">
-      <div class="row">
-        <div class="col offset-s2 s8 center-align">
-          <br />
-          Made in Germany by <a href="https://twitter.com/shadowban_eu" target="_blank" rel="noopener noreferrer">@shadowban_eu</a>
-        </div>
-      </div>
-    </footer>
-    <div id="task-item-template" class="hide">
-      <li data-task-id="NOTICE--{{task.id}}--ME">
-        <div class="collapsible-header" data-task-component="header">
-          <i class="material-icons notranslate" data-task-component="icon"><!-- task.icon --></i>
-          <div class="task-message" data-task-component="message">
-            <span><!-- task.message --></span>
-          </div>
-          <!-- remove, if !task.description -->
-          <div class="result-hint" data-task-component="hint">
-            <i class="material-icons">info</i>
-            <i class="material-icons active-indicator">arrow_drop_down</i>
-          </div>
-          <!-- !task.description -->
-        </div>
-        <!-- remove, if !task.description -->
-        <div class="collapsible-body left-align" data-task-component="description">
-          <h5><!-- task.description.title --></h5>
-          <p>
-            <!-- task.description.text -->
-          </p>
-          <!-- remove, if !task.faq -->
-          <ul id="NOTICE--{{task.faq.id}}--ME" class="collapsible hide" data-task-component="faq">
-            <li class="techInfo">
-              <div class="collapsible-header">
-              <span>Technical information about the result</span>
-              </div>
-              <div class="collapsible-body">
-                <p class="techContent">
-                </p>
-              </div>
+        <section class="row">
+            <div class="col s12 offset-m1 m10 offset-l2 l8">
+                <div class="loadable-container">
+                    <ul id="functionality" class="collapsible popout loadable loading">
+                        <li>
+                            <div class="flex-col collapsible-header">
+                                <span class="attention" data-i18n="functionality:limitVisibility.title"> {{functionality:limitVisibility.title}} </span>
+                                <span class="text-strike font-small" data-i18n="functionality:noShadowbanClaim.title"> {{functionality:noShadowbanClaim.title}} </span>
+                            </div>
+                            <div class="collapsible-body">
+                                <p class="noban-claim" data-i18n="functionality:limitVisibility.text">{{functionality:limitVisibility.text}}</p>
+                                <img class="materialboxed" width="100%" src="img/updated-tos.png" />
+                                <p class="noban-claim-legacy" data-i18n="functionality:noShadowbanClaim.text">{{functionality:noShadowbanClaim.text}}</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header" data-i18n="functionality:qfdTestGone.title">{{functionality:qfdTestGone.title}}</div>
+                            <div class="collapsible-body" data-i18n="functionality:qfdTestGone.text">{{functionality:qfdTestGone.text}}</div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header" data-i18n="functionality:testerFunctions.title">{{functionality:testerFunctions.title}}</div>
+                            <div class="collapsible-body" data-i18n="functionality:testerFunctions.text">{{functionality:testerFunctions.text}}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="section">
+            <center>
+                <button notranslate style="background: #0a59f7; color: white !important; border-radius: 48px; border: none; padding: 8px">
+                    <i class="material-icons notranslate" style="font-size: 1.1rem; position: relative; top: 2px; left: 4px" data-task-component="icon">share</i>
+                    <a style="color: white; text-decoration: none; margin-left: 8px; margin-right: 8px; font-size: 1rem" class="notranslate" href="https://twitter.com/intent/tweet?text=Twitter%20Shadowban%20Test%20(by%20@HiSubway%20and%20@terminaling)%0Ahttps%3A%2F%2Fhisubway.online%2Fshadowban%2F">ツイートで友達に教える</a>
+                </button>
+            </center>
+            <div class="row">
+                <div class="col offset-s2 s8 center-align">
+                    <br />
+                    Made by <a href="https://twitter.com/hisubway" target="_blank" rel="noopener noreferrer">@HiSubway</a>
+                    and
+                    <a href="https://twitter.com/terminaling" target="_blank" rel="noopener noreferrer">@terminaling</a>
+                    based on <a href="https://github.com/shadowban-eu/">shadowban.eu</a>
+                    /
+                    <a href="https://github.com/Steve-0628/shadowban-frontend">Github</a>
+                    <small>Note : This site is not related to shadowban.eu<br />注 : このサイトは旧shadowban.euとは関係ありません</small>
+                </div>
+            </div>
+        </footer>
+        <div id="task-item-template" class="hide">
+            <li data-task-id="NOTICE--{{task.id}}--ME">
+                <div class="collapsible-header" data-task-component="header">
+                    <i class="material-icons notranslate" data-task-component="icon"><!-- task.icon --></i>
+                    <div class="task-message" data-task-component="message">
+                        <span><!-- task.message --></span>
+                    </div>
+                    <!-- remove, if !task.description -->
+                    <div class="result-hint" data-task-component="hint">
+                        <i class="material-icons">info</i>
+                        <i class="material-icons active-indicator">arrow_drop_down</i>
+                    </div>
+                    <!-- !task.description -->
+                </div>
+                <!-- remove, if !task.description -->
+                <div class="collapsible-body left-align" data-task-component="description">
+                    <h5><!-- task.description.title --></h5>
+                    <p>
+                        <!-- task.description.text -->
+                    </p>
+                    <!-- remove, if !task.faq -->
+                    <ul id="NOTICE--{{task.faq.id}}--ME" class="collapsible hide" data-task-component="faq">
+                        <li class="techInfo">
+                            <div class="collapsible-header">
+                                <span>Technical information about the result</span>
+                            </div>
+                            <div class="collapsible-body">
+                                <p class="techContent"></p>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- !task.faq -->
+                </div>
+                <!-- !task.description -->
             </li>
-          </ul>
-          <!-- !task.faq -->
         </div>
-        <!-- !task.description -->
-      </li>
-    </div>
-    <div id="qf-setting-toast-template" class="hide">
-      <div class="row">
-        <div
-          class="col s12"
-          data-i18n="common:qfSettingToast"
-        >
-          {{common:qfSettingToast}}
+        <div id="qf-setting-toast-template" class="hide">
+            <div class="row">
+                <div class="col s12" data-i18n="common:qfSettingToast">{{common:qfSettingToast}}</div>
+            </div>
+            <div class="row">
+                <div class="col s12 center">
+                    <button class="btn-flat toast-action">OK</button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col s12 center">
-          <button class="btn-flat toast-action">OK</button>
+        <div id="donate-modal" class="modal modal-fixed-footer">
+            <div class="modal-content" data-i18n="common:supportModal.content">{{common:supportModal.content}}</div>
+            <div class="modal-footer">
+                <a href="https://www.paypal.me/shadowban" class="waves-effect waves white btn modal-close" data-i18n="common:supportModal.donateButton"> {{common:supportModal.donateButton}} </a>
+                <a class="waves-effect waves white btn modal-close" data-i18n="common:supportModal.dismissButton"> {{common:supportModal.dismissButton}} </a>
+            </div>
         </div>
-      </div>
-    </div>
-    <div id="donate-modal" class="modal modal-fixed-footer">
-      <div
-        class="modal-content"
-        data-i18n="common:supportModal.content"
-      >
-        {{common:supportModal.content}}
-      </div>
-      <div class="modal-footer">
-        <a
-          href="https://www.paypal.me/shadowban"
-          class="waves-effect waves white btn modal-close"
-          data-i18n="common:supportModal.donateButton"
-        >
-          {{common:supportModal.donateButton}}
-        </a>
-        <a
-          class="waves-effect waves white btn modal-close"
-          data-i18n="common:supportModal.dismissButton"
-        >
-          {{common:supportModal.dismissButton}}
-        </a>
-      </div>
-    </div>
-    <div class="ph-item">
-      <div class="ph-col-12">
-        <div class="ph-picture"></div>
-      </div>
-    </div>
-  </body>
+        <div class="ph-item">
+            <div class="ph-col-12">
+                <div class="ph-picture"></div>
+            </div>
+        </div>
+    </body>
 </html>
