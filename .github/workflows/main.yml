@@ -24,10 +24,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      - uses: volta-cli/action@v1.7.0
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: volta run npm run build
+        run: npm run build
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
