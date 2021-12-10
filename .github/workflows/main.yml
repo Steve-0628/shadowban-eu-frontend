@@ -50,7 +50,7 @@ jobs:
           source-directory: ~/hmpf/
           destination-github-username: steve-0628
           destination-repository-name: hmpf
-          target-branch: shadowban-update
+          target-branch: master
           user-email: action@github.com
 #          git config --local user.email "action@github.com"
 #          git config --local user.name "GitHub Action"
