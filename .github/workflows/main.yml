@@ -41,8 +41,9 @@ jobs:
           git clone https://github.com/steve-0628/hmpf
           rm -rf hmpf/shadowban/
           cp -r shadowban-frontend/dist/ hmpf/shadowban/
-      - uses: cpina/github-action-push-to-another-repository
-        with:
+      - name: Run it
+        - uses: cpina/github-action-push-to-another-repository
+          with:
             source-directory: ../hmpf/
             destination-github-username: steve-0628
             destination-repository-name: hmpf
