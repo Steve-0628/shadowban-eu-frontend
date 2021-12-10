@@ -49,7 +49,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: `$DEST_DIR`
+          source-directory: ${DEST_DIR}
           destination-github-username: steve-0628
           destination-repository-name: hmpf
           user-email: action@github.com
