@@ -42,6 +42,7 @@ jobs:
           rm -rf hmpf/shadowban/
           cp -r shadowban-frontend/dist/ hmpf/shadowban/
     
+      - name: now push it
         uses: cpina/github-action-push-to-another-repository
         with:
           source-directory: ../hmpf/
