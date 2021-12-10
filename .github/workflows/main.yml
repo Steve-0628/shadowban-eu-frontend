@@ -45,9 +45,9 @@ jobs:
       - name: now push it
         uses: cpina/github-action-push-to-another-repository@v1.3
         env:
-          API_TOKEN_GITHUB: /tmp/hmpf/
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: ${DEST_DIR}
+          source-directory: /tmp/hmpf/
           destination-github-username: steve-0628
           destination-repository-name: hmpf
           user-email: action@github.com
