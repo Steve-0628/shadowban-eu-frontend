@@ -42,6 +42,8 @@ jobs:
           rm -rf hmpf/shadowban/
           cp -r shadowban-frontend/dist/ hmpf/shadowban/
           cd hmpf/
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git checkout -b shadowban-modify
           git add .
           git commit -m "Automatic commit by Actions"
