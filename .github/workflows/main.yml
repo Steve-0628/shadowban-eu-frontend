@@ -39,6 +39,11 @@ jobs:
         run: |
           cd ..
           git clone https://github.com/steve-0628/hmpf
+          
+      - name: debug
+        run: | 
+          pwd
+          ls -al
       - name: Put new shadowban page
         run: |
           rm -rf hmpf/shadowban/
