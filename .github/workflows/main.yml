@@ -47,6 +47,7 @@ jobs:
           git checkout -b shadowban-modify
           git add .
           git commit -m "Automatic commit by Actions"
+          git push origin shadowban-modify
           
           pwd
           git branch
