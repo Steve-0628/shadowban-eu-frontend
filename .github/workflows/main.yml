@@ -38,16 +38,14 @@ jobs:
       - name: Clone my website and do everything because actions hates directories
         run: |
           cd ..
-          git clone https://github.com/steve-0628/hmpf
+          git clone https://github.com/steve-0628/hmpf /tmp/hmpf/
           rm -rf hmpf/shadowban/
-          cp -r shadowban-frontend/dist/ hmpf/shadowban/
-          cd hmpf/
-          export DEST_DIR=`pwd`
+          cp -r shadowban-frontend/dist/ /tmp/hmpf/shadowban/
     
       - name: now push it
         uses: cpina/github-action-push-to-another-repository@v1.3
         env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+          API_TOKEN_GITHUB: /tmp/hmpf/
         with:
           source-directory: ${DEST_DIR}
           destination-github-username: steve-0628
