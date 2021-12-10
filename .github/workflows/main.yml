@@ -41,13 +41,13 @@ jobs:
           git clone https://github.com/steve-0628/hmpf
           rm -rf hmpf/shadowban/
           cp -r shadowban-frontend/dist/ hmpf/shadowban/
-      - name: Run it
-        - uses: cpina/github-action-push-to-another-repository
-          with:
-            source-directory: ../hmpf/
-            destination-github-username: steve-0628
-            destination-repository-name: hmpf
-            user-email: action@github.com
+    
+        uses: cpina/github-action-push-to-another-repository
+        with:
+          source-directory: ../hmpf/
+          destination-github-username: steve-0628
+          destination-repository-name: hmpf
+          user-email: action@github.com
             
 #          git config --local user.email "action@github.com"
 #          git config --local user.name "GitHub Action"
@@ -56,6 +56,6 @@ jobs:
 #          git commit -m "Automatic commit by Actions"
 #          git push origin shadowban-modify
           
-          pwd
-          git branch
-          git remote
+          # pwd
+          # git branch
+          # git remote
