@@ -35,35 +35,17 @@ jobs:
       - name: Build
         run: npm run build
         
-      - name: Clone my website
+      - name: Clone my website and do everything because actions hates directories
         run: |
           cd ..
           git clone https://github.com/steve-0628/hmpf
-          
-      - name: debug
-        run: | 
-          pwd
-          ls -al
-      - name: Put new shadowban page
-        run: |
           rm -rf hmpf/shadowban/
           cp -r shadowban-frontend/dist/ hmpf/shadowban/
-          
-      - name: cd into cloned repo
-        run: cd hmpf/
-
-      - name: create branch and make commit
-        run: |
+          cd hmpf/
           git checkout -b shadowban-modify
           git add .
           git commit -m "Automatic commit by Actions"
           
-      - name: where am i?
-        run: |
           pwd
           git branch
           git remote
-          
-          
-          
-          
