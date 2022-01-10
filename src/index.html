@@ -38,7 +38,6 @@
                     input.dispatchEvent(new Event("keyup"));
                     check.click();
                 };
-                window.history.replaceState = function () {};
 
                 window.setTimeout(() => setUsername(getQueries().username), 100);
             });
