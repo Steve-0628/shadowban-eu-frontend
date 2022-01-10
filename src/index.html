@@ -31,8 +31,10 @@
                 const setUsername = (username = null) => {
                     const input = document.getElementById("screenName");
                     const check = document.getElementById("check");
-                    if (!(username && input && check)) return false;
+                    const label = document.querySelector('label[for="screenName"]');
+                    if (!(username && input && check && label)) return false;
                     input.value = username;
+                    label.classList.add('active');
                     input.dispatchEvent(new Event("keyup"));
                     check.click();
                 };
